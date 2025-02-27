@@ -37,6 +37,7 @@ public class User {
     private LocalDate lastModifyDate;
 
     @Column(name ="user_role")
+    @Enumerated(EnumType.STRING)
     private UserRole userRole;
 
 }
