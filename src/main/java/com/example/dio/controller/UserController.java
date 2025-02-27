@@ -20,12 +20,12 @@ public class UserController {
     public ResponseEntity<ResponseStructure<User>> registerUser(@RequestBody User user){
        user = userService.registerUser(user);
 
-       ResponseStructure<User> structure= new ResponseStructure<>();
-       structure.setData(user);
-       structure.setStatus(HttpStatus.CREATED.value());
-       structure.setMessage("user Created");
-
-       return new ResponseEntity<ResponseStructure<User>>(structure,HttpStatus.CREATED);
+       ResponseStructure<User> structure= ResponseStructure.<User>builder()
+               .status(HttpStatus.CREATED.value())
+               .message("User Created")
+               .data(user)
+               .build();
+       return ResponseEntity.status(HttpStatus.CREATED).body(structure);
 
     }
 }
