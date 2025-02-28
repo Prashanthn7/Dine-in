@@ -10,6 +10,6 @@ public class RegistrationRequest {
     private String username;
     private String email;
     private String password;
-    private long phoneNo;
+    private String phoneNo;
     private UserRole userRole;
 }

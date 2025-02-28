@@ -5,7 +5,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 @Setter
 @Getter
@@ -14,7 +14,7 @@ public class UserResponse {
     private long userId;
     private String username;
     private UserRole userRole;
-    private LocalDateTime createdAt;
-    private LocalDateTime lastModifyDate;
+    private LocalDate createdAt;
+    private LocalDate lastModifyDate;
 
 }

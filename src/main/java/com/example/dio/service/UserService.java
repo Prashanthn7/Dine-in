@@ -1,12 +1,14 @@
 package com.example.dio.service;
 
+import com.example.dio.dto.request.RegistrationRequest;
+import com.example.dio.dto.response.UserResponse;
 import com.example.dio.model.User;
 
 public interface UserService {
 
-    public User registerUser(User user);
+    public UserResponse registerUser(RegistrationRequest registrationRequest);
 
-    public User findUserById(long userId);
+    public UserResponse findUserById(long userId);
 
     public User updateUserById(User user,long userId);
 }

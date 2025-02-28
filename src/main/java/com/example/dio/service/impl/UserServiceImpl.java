@@ -1,5 +1,7 @@
 package com.example.dio.service.impl;
 
+import com.example.dio.dto.request.RegistrationRequest;
+import com.example.dio.dto.response.UserResponse;
 import com.example.dio.enums.UserRole;
 import com.example.dio.exception.UserNotFoundByIdException;
 import com.example.dio.model.Admin;
@@ -10,7 +12,6 @@ import com.example.dio.service.UserService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.Optional;
 
 @Service
 @AllArgsConstructor
@@ -18,16 +19,28 @@ public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
 
     @Override
-    public User registerUser(User user) {
+    public UserResponse registerUser(RegistrationRequest registrationRequest) {
 
-        User user2=this.createUserByRole(user.getUserRole());
-        this.mapToNewUser(user,user2);
-        return userRepository.save(user2);
+        User user=this.createUserByRole(registrationRequest.getUserRole());
+        this.mapToUserEntity(user,registrationRequest);
+        userRepository.save(user);
+        return this.mapToUserResponse(user);
+    }
+
+    private UserResponse mapToUserResponse(User user) {
+        return UserResponse.builder()
+                .userId(user.getUserId())
+                .username(user.getUsername())
+                .userRole(user.getUserRole())
+                .createdAt(user.getCreatedAt())
+                .lastModifyDate(user.getLastModifyDate())
+                .build();
     }
 
     @Override
-    public User findUserById(long userId) {
-        return userRepository.findById(userId).orElseThrow(() -> new UserNotFoundByIdException("Couldn't Find User By id"));
+    public UserResponse findUserById(long userId) {
+        User user= userRepository.findById(userId).orElseThrow(() -> new UserNotFoundByIdException("Couldn't Find User By id"));
+      return this.mapToUserResponse(user);
     }
 
     @Override
@@ -38,6 +51,14 @@ public class UserServiceImpl implements UserService {
       return userRepository.save(exuser);
     }
 
+    private void mapToUserEntity(User user,RegistrationRequest registrationRequest ){
+        user.setUsername(registrationRequest.getUsername());
+        user.setEmail(registrationRequest.getEmail());
+        user.setPassword(registrationRequest.getPassword());
+        user.setPhoneNo(registrationRequest.getPhoneNo());
+        user.setUserRole(registrationRequest.getUserRole());
+
+    }
     private void mapToNewUser(User user,User user2) {
         user2.setUsername(user.getUsername());
         user2.setEmail(user.getEmail());
