@@ -1,8 +1,8 @@
 package com.example.dio.controller;
 
 import com.example.dio.dto.request.RegistrationRequest;
+import com.example.dio.dto.request.UserRequest;
 import com.example.dio.dto.response.UserResponse;
-import com.example.dio.model.User;
 import com.example.dio.service.UserService;
 import com.example.dio.util.ResponseBuilder;
 import com.example.dio.util.ResponseStructure;
@@ -33,9 +33,9 @@ public class UserController {
     }
 
     @PutMapping("/users/{userId}")
-    public ResponseEntity<ResponseStructure<User>> updateUSerById(@RequestBody User user,@PathVariable long userId){
-        User u = userService.updateUserById(user,userId);
-        return ResponseBuilder.success(HttpStatus.OK,"User updated",u);
+    public ResponseEntity<ResponseStructure<UserResponse>> updateUSerById(@RequestBody UserRequest userRequest, @PathVariable long userId){
+        UserResponse response = userService.updateUserById(userRequest,userId);
+        return ResponseBuilder.success(HttpStatus.OK,"User updated",response);
     }
 
 

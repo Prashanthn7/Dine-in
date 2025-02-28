@@ -1,6 +1,7 @@
 package com.example.dio.service.impl;
 
 import com.example.dio.dto.request.RegistrationRequest;
+import com.example.dio.dto.request.UserRequest;
 import com.example.dio.dto.response.UserResponse;
 import com.example.dio.enums.UserRole;
 import com.example.dio.exception.UserNotFoundByIdException;
@@ -44,11 +45,12 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User updateUserById(User user, long userId) {
+    public UserResponse updateUserById(UserRequest userRequest, long userId) {
      User exuser=  userRepository.findById(userId).orElseThrow(()-> new UserNotFoundByIdException("Couldnot find the user by id"));
-      this.mapToNewUser(user,exuser);
+      this.mapToNewUser(userRequest,exuser);
 
-      return userRepository.save(exuser);
+      userRepository.save(exuser);
+      return this.mapToUserResponse(exuser);
     }
 
     private void mapToUserEntity(User user,RegistrationRequest registrationRequest ){
@@ -59,12 +61,17 @@ public class UserServiceImpl implements UserService {
         user.setUserRole(registrationRequest.getUserRole());
 
     }
-    private void mapToNewUser(User user,User user2) {
-        user2.setUsername(user.getUsername());
-        user2.setEmail(user.getEmail());
-        user2.setPassword(user.getPassword());
-        user2.setPhoneNo(user.getPhoneNo());
-        user2.setUserRole(user.getUserRole());
+    private void mapToNewUser(User source,User target) {
+        target.setUsername(source.getUsername());
+        target.setEmail(source.getEmail());
+        target.setPassword(source.getPassword());
+        target.setPhoneNo(source.getPhoneNo());
+        target.setUserRole(source.getUserRole());
+    }
+    private void mapToNewUser(UserRequest source,User target) {
+        target.setUsername(source.getUsername());
+        target.setEmail(source.getEmail());
+        target.setPhoneNo(source.getPhoneNo());
     }
 
     private User createUserByRole(UserRole role) {
