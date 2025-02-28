@@ -28,7 +28,12 @@ public class UserController {
        User user = userService.findUserById(userId);
 
         return ResponseBuilder.success(HttpStatus.FOUND,"User Found",user);
+    }
 
+    @PutMapping("/update/{userId}")
+    public ResponseEntity<ResponseStructure<User>> updateUSerById(@RequestBody User user,@PathVariable long userId){
+        User u = userService.updateUserById(user,userId);
+        return ResponseBuilder.success(HttpStatus.OK,"User updated",u);
     }
 
 

@@ -30,6 +30,14 @@ public class UserServiceImpl implements UserService {
         return userRepository.findById(userId).orElseThrow(() -> new UserNotFoundByIdException("Couldn't Find User By id"));
     }
 
+    @Override
+    public User updateUserById(User user, long userId) {
+     User exuser=  userRepository.findById(userId).orElseThrow(()-> new UserNotFoundByIdException("Couldnot find the user by id"));
+      this.mapToNewUser(user,exuser);
+
+      return userRepository.save(exuser);
+    }
+
     private void mapToNewUser(User user,User user2) {
         user2.setUsername(user.getUsername());
         user2.setEmail(user.getEmail());
