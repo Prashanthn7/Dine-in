@@ -1,15 +1,16 @@
 package com.example.dio.dto.request;
 
-import com.example.dio.enums.UserRole;
+import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.validator.constraints.NotBlank;
 
-@Setter
 @Getter
-public class RegistrationRequest {
+@Setter
+public class UserRequest {
+    @NotNull
+    @NotBlank
     private String username;
     private String email;
-    private String password;
     private String phoneNo;
-    private UserRole userRole;
 }

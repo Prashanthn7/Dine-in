@@ -1,12 +1,17 @@
 package com.example.dio.service;
 
-import com.example.dio.model.User;
+import com.example.dio.dto.request.RegistrationRequest;
+import com.example.dio.dto.request.UserRequest;
+import com.example.dio.dto.response.UserResponse;
+import com.example.dio.mapper.UserMapper;
+import org.mapstruct.factory.Mappers;
 
 public interface UserService {
+    UserMapper INSTANCE = Mappers.getMapper(UserMapper.class);
 
-    public User registerUser(User user);
+    public UserResponse registerUser(RegistrationRequest registrationRequest);
 
-    public User findUserById(long userId);
+    public UserResponse findUserById(long userId);
 
-    public User updateUserById(User user,long userId);
+    public UserResponse updateUserById(UserRequest userRequest, long userId);
 }
