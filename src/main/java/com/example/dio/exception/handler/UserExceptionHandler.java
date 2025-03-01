@@ -1,5 +1,6 @@
-package com.example.dio.exception;
+package com.example.dio.exception.handler;
 
+import com.example.dio.exception.UserNotFoundByIdException;
 import com.example.dio.util.ResponseBuilder;
 import com.example.dio.util.SimpleErrorResponse;
 import org.springframework.http.HttpStatus;
