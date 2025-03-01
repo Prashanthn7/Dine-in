@@ -6,9 +6,10 @@ import com.example.dio.dto.response.UserResponse;
 import com.example.dio.model.User;
 import org.mapstruct.Mapper;
 import org.mapstruct.MappingTarget;
+import org.mapstruct.factory.Mappers;
 
 @Mapper(componentModel = "spring")
-public interface UserMapper {
+public  interface UserMapper {
      void mapToUserEntity(@MappingTarget User user, RegistrationRequest registrationRequest );
 
      void mapToNewUser(UserRequest source, @MappingTarget User target);
