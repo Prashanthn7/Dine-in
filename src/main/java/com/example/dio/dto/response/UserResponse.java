@@ -7,7 +7,6 @@ import java.time.LocalDate;
 
 @Setter
 @Getter
-@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 public class UserResponse {
