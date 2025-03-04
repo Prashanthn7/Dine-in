@@ -24,7 +24,7 @@ public class RegistrationRequest {
     @Pattern(regexp = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%&])(?=\\S+$).{12,20}$", message = "Password should contain atleast one Uppercase, Lowercase,special characters and Number")
     private String password;
 
-    @Pattern(regexp = "^[6-9]d{9}$",message = "phone number should contain 10 digits")
+    @Pattern(regexp = "^[6-9]\\d{9}$",message = "phone number should contain 10 digits")
     private String phoneNo;
     private UserRole userRole;
 }
