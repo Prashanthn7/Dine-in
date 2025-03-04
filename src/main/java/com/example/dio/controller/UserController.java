@@ -24,6 +24,7 @@ import org.springframework.web.bind.annotation.*;
         Collection of API Endpoints 
         Dealing with user Data.
         """)
+@RequestMapping("${app.base-url}")
 public class UserController {
 
     private final UserService userService;
