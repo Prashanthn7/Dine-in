@@ -50,4 +50,7 @@ public class Restaurant {
     @ManyToMany(mappedBy = "restaurants",fetch=FetchType.EAGER)
     private List<CusineType> cuisine;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Admin admin;
+
 }
