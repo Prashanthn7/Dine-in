@@ -12,7 +12,6 @@ import com.example.dio.model.User;
 import com.example.dio.repository.UserRepository;
 import com.example.dio.service.UserService;
 import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
 import org.springframework.stereotype.Service;
 
 
