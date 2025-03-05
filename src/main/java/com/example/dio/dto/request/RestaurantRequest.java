@@ -1,6 +1,7 @@
 package com.example.dio.dto.request;
 
 import com.example.dio.enums.DietType;
+import com.example.dio.model.CusineType;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
@@ -38,6 +39,7 @@ public class RestaurantRequest {
     @NotBlank
     private LocalTime opensAt;
 
+
     @NotEmpty
     @NotBlank
     private LocalTime closesAt;
@@ -46,7 +48,8 @@ public class RestaurantRequest {
 
     @NotEmpty
     @NotBlank
-    private List<String> cuisines;
+    private List<String> cusineTypes;
+
 
 }
 

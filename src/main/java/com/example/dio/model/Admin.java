@@ -11,5 +11,5 @@ import java.util.List;
 public class Admin extends User{
 
     @OneToMany(mappedBy = "admin")
-    private List<Restaurant> restaurant;
+    private List<Restaurant> restaurants;
 }
