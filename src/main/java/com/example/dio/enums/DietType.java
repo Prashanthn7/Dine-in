@@ -1,4 +1,4 @@
-package com.example.dio.model.enums;
+package com.example.dio.enums;
 
 public enum DietType {
     VEG,NONVEG;
