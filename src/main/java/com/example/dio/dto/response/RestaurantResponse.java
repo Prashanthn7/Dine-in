@@ -18,7 +18,7 @@ public class RestaurantResponse {
     private String address;
     private LocalTime opensAt;
     private LocalTime closesAt;
-    private DietType dietType;
+    private List<DietType> dietTypes;
     private List<String> cuisines;
 
 }

@@ -42,7 +42,7 @@ public class RestaurantRequest {
     @NotBlank
     private LocalTime closesAt;
 
-    private List<DietType> dietType;
+    private List<DietType> dietTypes;
 
     @NotEmpty
     @NotBlank
