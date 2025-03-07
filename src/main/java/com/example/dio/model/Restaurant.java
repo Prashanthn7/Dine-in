@@ -1,13 +1,13 @@
 package com.example.dio.model;
 
-import com.example.dio.model.enums.DietType;
+import com.example.dio.enums.DietType;
 import jakarta.persistence.*;
-import lombok.Generated;
 import lombok.Getter;
 import lombok.Setter;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.List;
 
 @Entity
 @Table(name="restaurants")
@@ -29,13 +29,28 @@ public class Restaurant {
     @Column(name="contact_number")
     private String contactNumber;
 
-    @Column()
+    @Column(name ="contact_email")
     private String contactEmail;
 
+    @Column(name ="opens_at")
     private LocalTime opensAt;
+
+    @Column(name ="closes_at")
     private LocalTime closesAt;
-    private DietType dietType;
+
+    @Column(name ="diet_type")
+    private List<DietType> dietTypes;
+
+    @Column(name ="created_at")
     private LocalDate createdAt;
+
+    @Column(name ="last_modify_at")
     private LocalDate lastModifiedAt;
+
+    @ManyToMany(fetch=FetchType.EAGER)
+    private List<CusineType> cusineTypes;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Admin admin;
 
 }
