@@ -2,10 +2,7 @@ package com.example.dio.dto.request;
 
 import com.example.dio.enums.DietType;
 import com.example.dio.model.CusineType;
-import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.Pattern;
+import jakarta.validation.constraints.*;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -35,19 +32,17 @@ public class RestaurantRequest {
     @Email(regexp = "^[a-zA-Z0-9._]+@gmail.com$")
     private String contactEmail;
 
-    @NotEmpty
-    @NotBlank
+    @NotNull(message = "opening time should not be null")
     private LocalTime opensAt;
 
 
-    @NotEmpty
-    @NotBlank
+    @NotNull(message = "closing time should not be null")
     private LocalTime closesAt;
 
+    @NotEmpty(message = "Diet Type should not be empty")
     private List<DietType> dietTypes;
 
-    @NotEmpty
-    @NotBlank
+    @NotEmpty(message = "cuisine Type should not be empty")
     private List<String> cusineTypes;
 
 

@@ -47,7 +47,7 @@ public class Restaurant {
     @Column(name ="last_modify_at")
     private LocalDate lastModifiedAt;
 
-    @ManyToMany(mappedBy = "restaurants",fetch=FetchType.EAGER)
+    @ManyToMany(fetch=FetchType.EAGER)
     private List<CusineType> cusineTypes;
 
     @ManyToOne(fetch = FetchType.LAZY)

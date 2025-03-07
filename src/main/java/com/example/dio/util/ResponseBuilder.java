@@ -69,6 +69,10 @@ public class ResponseBuilder {
         return error(HttpStatus.NOT_FOUND, message);
     }
 
+    public static <T> ResponseEntity<SimpleErrorResponse> unAutherized(String message) {
+        return error(HttpStatus.FORBIDDEN, message);
+    }
+
     /**
      * Helps creating the error response of the data including the HttpStatus and the error message
      *
@@ -76,6 +80,7 @@ public class ResponseBuilder {
      * @param message it specifies the error message of the specified status
      * @return        it returns the ResponseEntity of type SimpleErrorResponse
      */
+
 
     public static ResponseEntity<SimpleErrorResponse> error(HttpStatus status, String message) {
         SimpleErrorResponse error = SimpleErrorResponse.builder()

@@ -14,13 +14,17 @@ import java.util.List;
 public interface RestaurantMapper {
 
     Restaurant mapToRestaurantEntity(RestaurantRequest restaurantRequest);
+
     RestaurantResponse mapToRestaurantResponse(Restaurant restaurant);
+
+
     default String mapToStringCuisineType(CusineType cusineType){
         if(cusineType == null){
             return null;
         }
         return cusineType.getCuisine();
     }
+
     default CusineType mapToCuisineType(String cusineType){
         if(cusineType == null){
             return null;

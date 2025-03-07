@@ -15,7 +15,7 @@ public class CusineType {
     @Id
     private String cuisine;
 
-    @ManyToMany
+    @ManyToMany(mappedBy = "cusineTypes")
     private List<Restaurant> restaurants;
 
 
