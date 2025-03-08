@@ -26,5 +26,6 @@ public class RegistrationRequest {
 
     @Pattern(regexp = "^[6-9]\\d{9}$",message = "phone number should contain 10 digits")
     private String phoneNo;
+
     private UserRole userRole;
 }

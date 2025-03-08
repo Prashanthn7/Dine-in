@@ -2,6 +2,7 @@ package com.example.dio.model;
 
 import com.example.dio.enums.DietType;
 import jakarta.persistence.*;
+import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -52,5 +53,8 @@ public class Restaurant {
 
     @ManyToOne(fetch = FetchType.LAZY)
     private Admin admin;
+
+    @OneToMany(mappedBy = "restaurant",fetch = FetchType.EAGER)
+    private List<com.example.dio.model.Table> tables;
 
 }
