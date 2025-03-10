@@ -20,7 +20,6 @@ public class TableRequest {
     @Pattern(regexp = "^[0-9]//d{2}$")
     private int tableCapacity;
 
-    private TableStatus status;
 
 
 }
