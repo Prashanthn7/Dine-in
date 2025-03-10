@@ -4,9 +4,11 @@ import com.example.dio.dto.request.FoodItemRequest;
 import com.example.dio.dto.response.FoodItemResponse;
 import com.example.dio.exception.RestaurantNotFoundByIdException;
 import com.example.dio.mapper.FoodItemMapper;
+import com.example.dio.model.Category;
 import com.example.dio.model.CusineType;
 import com.example.dio.model.FoodItem;
 import com.example.dio.model.Restaurant;
+import com.example.dio.repository.CateroryRepository;
 import com.example.dio.repository.CuisineTypeRepository;
 import com.example.dio.repository.FoodItemRepository;
 import com.example.dio.repository.RestaurantRepository;
@@ -25,6 +27,7 @@ public class FoodItemServiceImpl implements FoodItemService {
     private final RestaurantRepository restaurantRepository;
     private final FoodItemMapper foodItemMapper;
     private final CuisineTypeRepository cuisineTypeRepository;
+    private final CateroryRepository cateroryRepository;
 
 
     @Override
@@ -37,22 +40,28 @@ public class FoodItemServiceImpl implements FoodItemService {
 
         CusineType cusineType =foodItem.getCusineType();
 
-         cuisineTypeRepository.findById(cusineType.getCuisine())
+
+        cuisineTypeRepository.findById(cusineType.getCuisine())
                 .orElseGet(() -> {
-                   cuisineTypeRepository.save(cusineType);
+                    cuisineTypeRepository.save(cusineType);
                     restaurant.getCusineTypes().add(cusineType);
                     restaurantRepository.save(restaurant);
                     return cusineType;
                 });
 
-
-
-
-         foodItem.setCusineType(cusineType);
-         foodItem.setRestaurant(restaurant);
+        foodItem.setCategories(this.createNonExistingCategory(foodItem.getCategories()));
+        foodItem.setCusineType(cusineType);
+        foodItem.setRestaurant(restaurant);
 
         foodItemRepository.save(foodItem);
 
         return foodItemMapper.mapToFoodItemResponse(foodItem);
+    }
+
+    private List<Category> createNonExistingCategory(List<Category> categories) {
+        return
+        categories.stream().map(type -> cateroryRepository.findById(type.getCategory())
+                .orElseGet(()-> cateroryRepository.save(type)))
+                .toList();
     }
 }

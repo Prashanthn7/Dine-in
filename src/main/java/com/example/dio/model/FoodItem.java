@@ -7,6 +7,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Entity
 @Setter
@@ -43,6 +44,9 @@ public class FoodItem {
 
     @ManyToOne
     private CusineType cusineType;
+
+    @ManyToMany
+    private List<Category> categories;
 
     @ManyToOne
     private Restaurant restaurant;
