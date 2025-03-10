@@ -20,9 +20,9 @@ public class TableServiceImpl implements TableService {
     private TableMapper tableMapper;
 
     @Override
-    public TableResponse createTable(TableRequest tableRequest, long userId) {
+    public TableResponse createTable(TableRequest tableRequest, long restaurantId) {
 
-       Restaurant restaurant= restaurantRepository.findById(userId)
+       Restaurant restaurant= restaurantRepository.findById(restaurantId)
                .orElseThrow(() -> new RestaurantNotFoundByIdException("Restaurant not found"));
 
        Table table =tableMapper.mapToTableEntity(tableRequest);

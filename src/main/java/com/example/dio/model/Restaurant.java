@@ -54,7 +54,10 @@ public class Restaurant {
     @ManyToOne(fetch = FetchType.LAZY)
     private Admin admin;
 
-    @OneToMany(mappedBy = "restaurant",fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "restaurant")
     private List<com.example.dio.model.Table> tables;
+
+    @OneToMany(mappedBy = "restaurant")
+    private List<FoodItem> foodItems;
 
 }
