@@ -27,7 +27,7 @@ public class FoodItemServiceImpl implements FoodItemService {
     private final RestaurantRepository restaurantRepository;
     private final FoodItemMapper foodItemMapper;
     private final CuisineTypeRepository cuisineTypeRepository;
-    private final CateroryRepository cateroryRepository;
+    private final CateroryRepository categoryRepository;
 
 
     @Override
@@ -58,10 +58,29 @@ public class FoodItemServiceImpl implements FoodItemService {
         return foodItemMapper.mapToFoodItemResponse(foodItem);
     }
 
+    @Override
+    public List<FoodItemResponse> findFoodItemByAllCategories(List<String> categories){
+//        List<Category> categoryList = foodItemMapper.mapToListOfCategory(categories);
+//        List<List<FoodItem>> foodItems =categoryList.stream().map(
+//                type -> {
+//                    List<FoodItem> foodItems1= cateroryRepository.findFoodItemByCategory(type);
+//                }
+//
+//        ).toList();
+//        return null;
+        List<String> categoryNames = categories.stream().distinct().toList(); // Remove duplicates
+        long categoryCount = categoryNames.size();
+
+        List<FoodItem> foodItems = categoryRepository.findFoodItemsByAllCategories(categoryNames, categoryCount);
+
+        return  foodItems.stream()
+                .map(foodItemMapper::mapToFoodItemResponse)
+                .toList();
+    }
     private List<Category> createNonExistingCategory(List<Category> categories) {
         return
-        categories.stream().map(type -> cateroryRepository.findById(type.getCategory())
-                .orElseGet(()-> cateroryRepository.save(type)))
+        categories.stream().map(type -> categoryRepository.findById(type.getCategory())
+                .orElseGet(()-> categoryRepository.save(type)))
                 .toList();
     }
 }

@@ -7,14 +7,17 @@ import com.example.dio.model.CusineType;
 import com.example.dio.model.FoodItem;
 import org.mapstruct.Mapper;
 
+import java.util.List;
+
 @Mapper(componentModel = "spring")
 public interface FoodItemMapper {
 
 
     FoodItem mapToNewFoodItemEntity(FoodItemRequest foodItemRequest);
-
+    List<Category> mapToListOfCategory(List<String> categories);
     FoodItemResponse mapToFoodItemResponse(FoodItem foodItem);
 
+    List<FoodItemResponse> mapToFoodItemResponseList(List<FoodItem> foodItems);
 
     default String mapToStringCategories(Category category) {
         if (category == null) {
