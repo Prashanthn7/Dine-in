@@ -5,6 +5,9 @@ import jakarta.persistence.*;
 import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.time.LocalDate;
 
@@ -13,6 +16,7 @@ import java.time.LocalDate;
 @Inheritance(strategy = InheritanceType.JOINED)
 @Getter
 @Setter
+@EntityListeners(AuditingEntityListener.class)
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -32,13 +36,22 @@ public class User {
     private String phoneNo;
 
     @Column(name="created_at")
+    @CreatedDate
     private LocalDate createdAt;
 
     @Column(name = "last_modified_date")
+    @LastModifiedDate
     private LocalDate lastModifyDate;
 
     @Column(name ="user_role")
     @Enumerated(EnumType.STRING)
     private UserRole userRole;
+
+//    @PrePersist
+//    public void prePersist(){
+//        this.createdAt=LocalDate.now();
+//        this.lastModifyDate=LocalDate.now();
+//
+//    }
 
 }
