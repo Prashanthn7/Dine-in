@@ -60,4 +60,7 @@ public class FoodItem {
 
     @ManyToOne
     private Restaurant restaurant;
+
+    @OneToMany(mappedBy = "foodItem")
+    private List<CartItem> cartItems;
 }

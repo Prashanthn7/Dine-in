@@ -32,4 +32,7 @@ public class Table {
 
     @ManyToMany
     private List<Staff> staffs;
+
+    @OneToMany(mappedBy = "table")
+    private List<CartItem> cartItems;
 }
