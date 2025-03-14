@@ -1,6 +1,7 @@
 package com.example.dio.service.impl;
 
 import com.example.dio.dto.response.CartItemResponse;
+import com.example.dio.exception.CartNotFoundByIdException;
 import com.example.dio.exception.FoodNotFoundByIdException;
 import com.example.dio.exception.TableNotFoundByIdException;
 import com.example.dio.mapper.CartItemMapper;
@@ -30,12 +31,21 @@ public class CartItemServiceImpl implements CartItemService {
                 .orElseThrow(()-> new FoodNotFoundByIdException("Food Not Found By ID"));
 
         CartItem cartItem= cartItemRepository.save(getCartItem(table,foodItem,quantity));
-
-
         return cartItemMapper.mapToCartItemResponse(cartItem);
+    }
 
+    @Override
+    public CartItemResponse updateCartItem(long cartId, int quantity) {
+       CartItem cartItem =cartItemRepository.findById(cartId)
+               .orElseThrow(()-> new CartNotFoundByIdException("Cart Not Found By id"));
+//        if(cartItem.getIsOrdered().equals(cartItem.getIsOrdered().ORDERED) ){
+//
+//        }
+       cartItem.setQuantity(quantity);
+       cartItem.setTotalPrice(cartItem.getFoodItem().getPrice() * quantity);
 
-
+       cartItemRepository.save(cartItem);
+        return cartItemMapper.mapToCartItemResponse(cartItem);
     }
 
     private CartItem getCartItem(Table table, FoodItem foodItem, int quantity) {
