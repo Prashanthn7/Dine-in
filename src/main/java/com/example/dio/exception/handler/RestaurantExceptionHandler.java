@@ -1,9 +1,6 @@
 package com.example.dio.exception.handler;
 
-import com.example.dio.exception.FoodNotFoundByIdException;
-import com.example.dio.exception.RestaurantNotFoundByIdException;
-import com.example.dio.exception.TableNotFoundByIdException;
-import com.example.dio.exception.UserNotFoundByIdException;
+import com.example.dio.exception.*;
 import com.example.dio.util.ResponseBuilder;
 import com.example.dio.util.SimpleErrorResponse;
 import org.springframework.http.ResponseEntity;
@@ -25,6 +22,11 @@ public class RestaurantExceptionHandler {
 
     @ExceptionHandler(TableNotFoundByIdException.class)
     public ResponseEntity<SimpleErrorResponse> handleSimpleErrorResponse(TableNotFoundByIdException ex){
+        return ResponseBuilder.notFound(ex.getMessage());
+    }
+
+    @ExceptionHandler(CartNotFoundByIdException.class)
+    public ResponseEntity<SimpleErrorResponse> handleSimpleErrorResponse(CartNotFoundByIdException ex){
         return ResponseBuilder.notFound(ex.getMessage());
     }
 }

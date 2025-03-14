@@ -17,11 +17,17 @@ public class CartItemController {
 
     @PostMapping("/tables/{tableId}/cartItem/foodItems/{foodId}")
     public ResponseEntity<ResponseStructure<CartItemResponse>> createCartItem(@PathVariable long tableId,
-                                                                             @PathVariable long foodId,
-                                                                             @RequestParam int quantity){
+                                                                              @PathVariable long foodId,
+                                                                              @RequestParam int quantity){
         CartItemResponse response = cartItemService.createCartItem(tableId,foodId,quantity);
 
         return ResponseBuilder.created(response,"CartItem Created");
+    }
+
+    @PatchMapping("/cart-items/{cartId}")
+    public ResponseEntity<ResponseStructure<CartItemResponse>> updateCartItem(@PathVariable long cartId,@RequestParam int quantity){
+        CartItemResponse response=  cartItemService.updateCartItem(cartId,quantity);
+        return ResponseBuilder.ok(response,"CartItem quantity updated");
     }
 
 }
