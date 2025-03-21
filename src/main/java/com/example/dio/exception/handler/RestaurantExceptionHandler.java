@@ -29,4 +29,8 @@ public class RestaurantExceptionHandler {
     public ResponseEntity<SimpleErrorResponse> handleSimpleErrorResponse(CartNotFoundByIdException ex){
         return ResponseBuilder.notFound(ex.getMessage());
     }
+    @ExceptionHandler(NoCartItemFoundException.class)
+    public ResponseEntity<SimpleErrorResponse> handleSimpleErrorResponse(NoCartItemFoundException ex){
+        return ResponseBuilder.notFound(ex.getMessage());
+    }
 }
