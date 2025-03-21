@@ -19,9 +19,7 @@ public class CartItem {
 
     private double totalPrice;
 
-    private OrderStatus isOrdered;
-
-
+    private boolean isOrdered;
 
     @ManyToOne
     private FoodItem foodItem;

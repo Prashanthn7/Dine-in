@@ -35,4 +35,7 @@ public class Table {
 
     @OneToMany(mappedBy = "table")
     private List<CartItem> cartItems;
+
+    @OneToMany
+    private List<Order> orders;
 }
